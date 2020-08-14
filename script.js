@@ -1,80 +1,104 @@
+const a = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9,
+];
+const b = [];
 
-const slides = [
-    new Slide(
-    1,
-    'Poo 1',
-    'https://memepedia.ru/wp-content/uploads/2019/06/images-you-can-hear.png',
-    'Content 1',
-),
-new Slide(
-    2,
-    'Poo 2',
-    'https://memepedia.ru/wp-content/uploads/2019/06/images-you-can-hear.png',
-    'Content 2'
-),
-new Slide(
-    3,
-    'Poo 3',
-    'https://memepedia.ru/wp-content/uploads/2019/06/images-you-can-hear.png',
-    'Content 3'
-),];
+const sum = (value, i) => {
+    console.log(value*2);
+};
+
+const multiple = (value, i) => {
+    return (value%2);
+};
 
 
+const forEach = (arr, cb) => {
+    for(let i = 0; i < arr.length; i++) {
+        cb(arr[i], i);
+    };
+};
 
-slides.forEach(({title}) => {
-    console.log({title});
+forEach(a, sum);
+console.log(a);
+
+
+const map = (arr, cb) => {
+    let arr2 = [];
+    for(let i = 0; i < arr.length; i++) {
+        arr2[i] = cb(arr[i], i, arr);
+    };
+    return arr2;
+};
+
+
+const filter = (arr, cb) => {
+    var arr2 = [];
+    for(let i = 0; i < arr.length; i++) {
+        if(cb(arr[i], i, arr)){
+        arr2.push(arr[i]);
+        };
+    };
+    return arr2;
+};
+
+const qwer = filter(a, multiple);
+console.log(qwer);
+
+
+const some = (arr, cb) => {
+    for(let i = 0; i < arr.length; i++) {
+        if(cb(arr[i], i, arr)) {
+            return true;
+        };
+    };
+    return false;
+};
+
+const asdf = some(a, (value) => {
+    return value > 10;
 });
-
-// const listOfUsers = [
-//     {
-//         id: 1,
-//         name: 'Petya',
-//         avatar: '',
-//         about: '...',
-//         taxesPayed: true,
-//         debt: 0,
-//     },
-//     {
-//         id: 2,
-//         name: 'Vasya',
-//         avatar: '',
-//         about: '...',
-//         taxesPayed: false,
-//         debt: 1000,
-//     },
-//     {
-//         id: 3,
-//         name: 'Vasya',
-//         avatar: '',
-//         about: '...',
-//         taxesPayed: false,
-//         debt: 35000,
-//     },
-// ];
-
-// console.log(JSON.stringify(listOfUsers));
-
-// const newArr = slides.map((slide) => `${slide.title}-${slide.content}`);
-// console.log(newArr);
-
-// const listOfSlidesFromUsers = listOfUsers.map(
-//     (user) => new Slide(user.id, user.name, user.avatar, user.about)
-// );
-
-// const userWithAvatar = listOfUsers.filter((user) => !!user.avatar);
-// // listOfSlidesFromUsers[0].toggle();
-
-// console.log(listOfSlidesFromUsers);
-// console.log(userWithAvatar);
-
-// const atLeastOne = listOfUsers.some((user) => !user.taxesPayed);
-// const allOfUsers = listOfUsers.every((user) => !user.taxesPayed);
-
-// console.log(atLeastOne);
-// console.log(allOfUsers);
-
-// const debt = listOfUsers.reduce((acc,next) => acc + next.debt, 0);
-
-// console.log(debt);
+console.log(asdf);
 
 
+const every = (arr, cb) => {
+    for(let i = 0; i < arr.length; i++) {
+        if(!cb(arr[i], i, arr)) {
+            return false;
+        };
+    };
+    return true;
+};
+
+const fg = every(a, (value) => {
+    return value < 10;
+});
+console.log(fg);
+
+
+const reduce = (arr, cb, startValue) => {
+    var result = startValue;
+    for(let i = 0; i < arr.length; i++) {
+        result = cb.call(null, result, arr[i], i, arr);
+    };
+    return result;
+};
+
+const res = reduce(a, (result, num) => {
+    return result + num;
+}, 0);
+console.log(res);
+
+
+const find = (arr, cb) => {
+    for(let i = 0; i < arr.length; i++) {
+        if(cb(arr[i], i, arr)) {
+            return arr[i];
+        };
+    };
+    return undefined;
+};
+
+const retro = (age) => {
+    return age > 4;
+};
+console.log(find(a, retro));
